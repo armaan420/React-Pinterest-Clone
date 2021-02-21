@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PinterestIcon from "@material-ui/icons/Pinterest";
 import IconButton from "@material-ui/core/IconButton";
@@ -8,7 +8,14 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import TextsmsIcon from "@material-ui/icons/Textsms";
 import { KeyboardArrowDown } from "@material-ui/icons";
 
-const Header = () => {
+const Header = ({ onSubmit }) => {
+  const [query, setQuery] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(query);
+  };
+
   return (
     <Wrapper>
       <LogoWrapper>
@@ -20,6 +27,9 @@ const Header = () => {
         <a href="/">Homepage</a>
       </HomePageButton>
       <FollowingButton>
+        <a href="/">Today</a>
+      </FollowingButton>
+      <FollowingButton>
         <a href="/">Following</a>
       </FollowingButton>
       <SearchWrapper>
@@ -28,8 +38,8 @@ const Header = () => {
             <SearchIcon />
           </IconButton>
           <form>
-            <input type="text" />
-            <button type="submit"></button>
+            <input type="text" onChange={(e) => setQuery(e.target.value)} />
+            <button type="submit" onClick={handleSubmit}></button>
           </form>
         </SearchBarWrapper>
       </SearchWrapper>
