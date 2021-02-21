@@ -2,10 +2,49 @@ import "./App.css";
 import Header from "./components/Header";
 import PinBoard from "./components/PinBoard";
 import unsplash from "./api/unsplash";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Loader from "./components/Loader";
 
 function App() {
   const [pins, setNewPins] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetchPics();
+    setLoading(false);
+    function fetchPics() {
+      const toGet = [];
+      let loadedPins = [];
+
+      const loadingPins = [
+        "bro",
+        "card",
+        "car",
+        "black",
+        "night",
+        "music",
+        "play",
+        "life",
+      ];
+
+      loadingPins.forEach((pin) => {
+        console.log(pin);
+        // onSearchSubmit(pin);
+
+        toGet.push(
+          getImages(pin).then((res) => {
+            let results = res.data.results;
+
+            loadedPins = loadedPins.concat(results);
+
+            loadedPins.sort((a, b) => 0.5 - Math.random());
+          })
+        );
+      });
+      Promise.all(toGet).then(() => {
+        setNewPins(loadedPins);
+      });
+    }
+  }, []);
 
   const getImages = (search) => {
     return unsplash.get("https://api.unsplash.com/search/photos", {
@@ -30,7 +69,7 @@ function App() {
   return (
     <div className="App">
       <Header onSubmit={onSearchSubmit} />
-      <PinBoard pins={pins} />
+      {loading ? <Loader /> : <PinBoard pins={pins} />}
     </div>
   );
 }

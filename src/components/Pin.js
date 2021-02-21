@@ -19,6 +19,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
+  // background-color: black;
   display: flex;
   align-items: center;
   box-sizing: border-box;
