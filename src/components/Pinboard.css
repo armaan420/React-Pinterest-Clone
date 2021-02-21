@@ -1,3 +1,14 @@
+.icon {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  margin: 10px 10px 0 0;
+  border-radius: 50%;
+  box-shadow: 0 7px 9px 2px rgba(22, 0, 0, 0.2);
+  width: 25px;
+}
+
 .mainboard__container {
   background-color: white;
   column-gap: 10px;

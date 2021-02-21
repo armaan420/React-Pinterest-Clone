@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Pin from "./Pin";
 import styled from "styled-components";
 import "./Pinboard.css";
+import AddIcon from "@material-ui/icons/Add";
+import { FaQuestion } from "react-icons/fa";
 
 const PinBoard = ({ pins }) => {
   return (
@@ -11,6 +13,8 @@ const PinBoard = ({ pins }) => {
           return <Pin key={pin.id} url={pin.urls} />;
         })}
       </Container>
+
+      <AddIcon className="icon" />
     </Wrapper>
   );
 };
